@@ -18,13 +18,9 @@ const VoiceControl = dynamic(
   () => import("@/components/VoiceControl").then((mod) => mod.VoiceControl),
   { ssr: false }
 );
-const ModeSelector = dynamic(
-  () => import("@/components/ModeSelector").then((mod) => mod.ModeSelector),
-  { ssr: false }
-);
 
 export default function Home() {
-  const [voiceMode] = useState<VoiceMode>("gemini");
+  const [voiceMode] = useState<VoiceMode>("gemini-live");
   const [currentEmotion, setCurrentEmotion] = useState<Emotion>("neutral");
   const [volume, setVolume] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
