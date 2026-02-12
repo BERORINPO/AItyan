@@ -10,7 +10,7 @@ import { GEMINI_LIVE_SYSTEM_PROMPT } from "@/lib/llm/prompts";
 
 // Vertex AI Live APIのWebSocketエンドポイント
 const LOCATION = "us-central1";
-const MODEL = "gemini-2.0-flash-001";
+const MODEL = "gemini-2.0-flash";
 
 const getVertexLiveUrl = () =>
     `wss://${LOCATION}-aiplatform.googleapis.com/ws/google.cloud.aiplatform.v1beta1.LlmBidiService/BidiGenerateContent`;
