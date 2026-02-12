@@ -34,23 +34,28 @@ body {
 }
 
 /* ========== Scrollbar ========== */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 ::-webkit-scrollbar-thumb {
   background: rgba(244, 114, 182, 0.3);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(244, 114, 182, 0.5);
 }
 
 /* ========== Vignette ========== */
 .vignette-overlay {
-  background: radial-gradient(
-    ellipse at center,
-    transparent 40%,
-    rgba(8, 4, 18, 0.5) 100%
-  );
+  background: radial-gradient(ellipse at center,
+      transparent 40%,
+      rgba(8, 4, 18, 0.5) 100%);
 }
 
 /* ========== Status Badge ========== */
@@ -121,13 +126,16 @@ body {
   outline: none;
   transition: all 0.2s ease;
 }
+
 .chat-input::placeholder {
   color: rgba(255, 255, 255, 0.25);
 }
+
 .chat-input:focus {
   border-color: rgba(244, 114, 182, 0.4);
   box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.1);
 }
+
 .chat-input:disabled {
   opacity: 0.5;
 }
@@ -146,10 +154,12 @@ body {
   transition: all 0.2s ease;
   flex-shrink: 0;
 }
+
 .send-button:hover:not(:disabled) {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
 }
+
 .send-button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
@@ -161,6 +171,7 @@ body {
   gap: 4px;
   align-items: center;
 }
+
 .typing-dots span {
   width: 6px;
   height: 6px;
@@ -168,8 +179,14 @@ body {
   background: rgba(255, 255, 255, 0.4);
   animation: typingBounce 1.4s ease-in-out infinite;
 }
-.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 /* ========== Mode Selector ========== */
 .mode-selector {
@@ -196,9 +213,11 @@ body {
   background: transparent;
   transition: all 0.2s ease;
 }
+
 .mode-option:hover {
   color: rgba(255, 255, 255, 0.8);
 }
+
 .mode-option-active {
   background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(168, 85, 247, 0.2));
   color: white;
@@ -220,15 +239,18 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
 .mic-button:hover:not(:disabled) {
   background: rgba(244, 114, 182, 0.2);
   border-color: rgba(244, 114, 182, 0.4);
   transform: scale(1.05);
 }
+
 .mic-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
+
 .mic-button-active {
   background: linear-gradient(135deg, #ec4899, #be185d) !important;
   border-color: transparent !important;
@@ -260,50 +282,112 @@ body {
 
 /* ========== Animations ========== */
 @keyframes pulse-ring {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  100% { transform: scale(1.6); opacity: 0; }
+  0% {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
 }
 
-.animate-pulse-ring { animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
-.delay-300 { animation-delay: 0.3s; }
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
 @keyframes slideDown {
-  from { transform: translateX(-50%) translateY(-10px); opacity: 0; }
-  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+  from {
+    transform: translateX(-50%) translateY(-10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes typingBounce {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-4px); }
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-4px);
+  }
 }
 
 @keyframes soundBar {
-  0% { height: 4px; }
-  100% { height: 16px; }
+  0% {
+    height: 4px;
+  }
+
+  100% {
+    height: 16px;
+  }
 }
 
 @keyframes messageSlideIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
-.animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
 
 /* ========== Mobile Responsive ========== */
 @media (max-width: 768px) {
+  .chat-panel-bg {
+    background: linear-gradient(180deg, rgba(15, 10, 30, 0.6), rgba(8, 4, 18, 0.85));
+    backdrop-filter: blur(12px);
+  }
+
   .mic-button {
     width: 56px;
     height: 56px;
   }
+
   .mic-button svg {
     width: 24px;
     height: 24px;

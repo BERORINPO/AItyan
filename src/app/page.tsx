@@ -55,9 +55,9 @@ export default function Home() {
   );
 
   return (
-    <main className="relative h-[100dvh] w-screen flex flex-col md:flex-row overflow-hidden">
+    <main className="relative h-[100dvh] w-screen overflow-hidden flex flex-col md:flex-row bg-black">
       {/* 3D Avatar Area */}
-      <div className="flex-1 relative min-h-[40vh] md:min-h-0 min-w-0">
+      <div className="flex-1 relative w-full h-full">
         <VRMViewer
           emotion={currentEmotion}
           isTalking={isSpeaking}
@@ -65,17 +65,19 @@ export default function Home() {
         />
 
         {/* Glassmorphism overlay for controls */}
-        <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:gap-3 z-10">
-          <VoiceControl
-            isListening={isListening}
-            isSpeaking={isSpeaking}
-            onToggleListening={toggleListening}
-          />
+        <div className="absolute bottom-[48vh] md:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:gap-3 z-10 pointer-events-none">
+          <div className="pointer-events-auto">
+            <VoiceControl
+              isListening={isListening}
+              isSpeaking={isSpeaking}
+              onToggleListening={toggleListening}
+            />
+          </div>
         </div>
 
         {/* Status indicator */}
         {isListening && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 status-badge z-10">
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 status-badge z-10 pointer-events-none">
             <div className="recording-dot" />
             <span className="text-xs font-medium text-white/90">
               {isSpeaking ? "あいが話しています..." : "聞いています..."}
@@ -84,8 +86,8 @@ export default function Home() {
         )}
       </div>
 
-      {/* Chat Panel - right side on desktop, bottom on mobile */}
-      <div className="w-full md:w-[340px] lg:w-[380px] h-[60vh] md:h-full flex-shrink-0 border-t md:border-t-0 md:border-l border-white/10">
+      {/* Chat Panel - right side on desktop, bottom overlay on mobile */}
+      <div className="fixed bottom-0 left-0 w-full h-[45dvh] md:relative md:h-full md:w-[340px] lg:w-[380px] flex-shrink-0 border-t md:border-t-0 md:border-l border-white/10 z-20 transition-all duration-300 ease-in-out">
         <ChatPanel
           messages={messages}
           onSendMessage={handleSendMessage}
