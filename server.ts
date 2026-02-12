@@ -8,11 +8,15 @@ import { IncomingMessage } from "http";
 import { createVertexLiveProxy } from "./src/lib/voice/vertex-live-proxy";
 
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev, dir: process.cwd() });
+console.log(`[Server] モード: ${dev ? "development" : "production"}`);
+console.log(`[Server] カレントディレクトリ: ${process.cwd()}`);
+
+const app = next({ dev });
 const handle = app.getRequestHandler();
 const PORT = parseInt(process.env.PORT || "3000", 10);
 
 app.prepare().then(() => {
+    console.log("[Server] Next.js準備完了");
     const server = createServer((req, res) => {
         const parsedUrl = parse(req.url!, true);
         handle(req, res, parsedUrl);
@@ -62,4 +66,7 @@ app.prepare().then(() => {
         console.log(`> Ready on http://localhost:${PORT}`);
         console.log(`> Vertex Live API: ws://localhost:${PORT}/vertex-live`);
     });
+}).catch(err => {
+    console.error("[Server] Critical error during app.prepare():", err);
+    process.exit(1);
 });
