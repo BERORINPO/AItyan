@@ -8,7 +8,7 @@ import { IncomingMessage } from "http";
 import { createVertexLiveProxy } from "./src/lib/voice/vertex-live-proxy";
 
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const app = next({ dev, dir: __dirname });
 const handle = app.getRequestHandler();
 const PORT = parseInt(process.env.PORT || "3000", 10);
 
