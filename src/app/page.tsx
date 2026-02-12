@@ -1,14 +1,27 @@
 "use client";
 
-import { useCallback } from "react";
-import { VRMViewer } from "@/components/VRMViewer";
-import { ChatPanel } from "@/components/ChatPanel";
-import { VoiceControl } from "@/components/VoiceControl";
-import { ModeSelector } from "@/components/ModeSelector";
+import { useCallback, useState } from "react";
+import dynamic from "next/dynamic";
 import { useConversation } from "@/hooks/useConversation";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
 import type { Emotion, VoiceMode } from "@/types";
-import { useState } from "react";
+
+const VRMViewer = dynamic(
+  () => import("@/components/VRMViewer").then((mod) => mod.VRMViewer),
+  { ssr: false }
+);
+const ChatPanel = dynamic(
+  () => import("@/components/ChatPanel").then((mod) => mod.ChatPanel),
+  { ssr: false }
+);
+const VoiceControl = dynamic(
+  () => import("@/components/VoiceControl").then((mod) => mod.VoiceControl),
+  { ssr: false }
+);
+const ModeSelector = dynamic(
+  () => import("@/components/ModeSelector").then((mod) => mod.ModeSelector),
+  { ssr: false }
+);
 
 export default function Home() {
   const [voiceMode, setVoiceMode] = useState<VoiceMode>("aws");
