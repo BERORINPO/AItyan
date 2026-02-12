@@ -7,8 +7,7 @@
     "dev:ws": "npx tsx server.ts",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:ws\"",
     "build": "next build",
-    "start": "next start",
-    "start:ws": "node -r tsx/cjs server.ts",
+    "start": "NODE_ENV=production npx tsx server.ts",
     "lint": "next lint"
   },
   "keywords": [],

@@ -6,8 +6,15 @@
  */
 
 // プロキシサーバーのWebSocket URL
+// プロキシサーバーのWebSocket URL
 const getProxyUrl = () => {
-  const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001";
+  let wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001";
+
+  if (process.env.NODE_ENV === "production" && typeof window !== "undefined") {
+    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    wsUrl = `${protocol}//${window.location.host}`;
+  }
+
   return `${wsUrl}/vertex-live`;
 };
 

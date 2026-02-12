@@ -153,7 +153,13 @@ export function useVoiceChat({
     source: MediaStreamAudioSourceNode,
     audioContext: AudioContext
   ) => {
-    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001";
+    let wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001";
+
+    if (process.env.NODE_ENV === "production" && typeof window !== "undefined") {
+      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+      wsUrl = `${protocol}//${window.location.host}/aws-voice`;
+    }
+
     const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 
