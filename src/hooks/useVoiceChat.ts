@@ -89,6 +89,7 @@ export function useVoiceChat({
 
       const source = audioContext.createBufferSource();
       source.buffer = audioBuffer;
+      source.playbackRate.value = 1.2; // ピッチを上げてかわいくする
 
       // ボリュームモニタリング用のAnalyserNode
       const analyser = audioContext.createAnalyser();
@@ -238,12 +239,15 @@ export function useVoiceChat({
         enqueueAudioChunk(audioData, audioContext);
       },
       onTranscription: (text) => {
-        onMessage({
-          id: uuidv4(),
-          role: "assistant",
-          content: text,
-          timestamp: Date.now(),
-        });
+        // 音声との同期のため少し遅延させる
+        setTimeout(() => {
+          onMessage({
+            id: uuidv4(),
+            role: "assistant",
+            content: text,
+            timestamp: Date.now(),
+          });
+        }, 600);
       },
       onError: (error) => {
         console.error("Gemini Liveエラー:", error);
