@@ -24,7 +24,7 @@ const ModeSelector = dynamic(
 );
 
 export default function Home() {
-  const [voiceMode, setVoiceMode] = useState<VoiceMode>("aws");
+  const [voiceMode] = useState<VoiceMode>("gemini");
   const [currentEmotion, setCurrentEmotion] = useState<Emotion>("neutral");
   const [volume, setVolume] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -70,7 +70,6 @@ export default function Home() {
 
         {/* Glassmorphism overlay for controls */}
         <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 md:gap-3 z-10">
-          <ModeSelector mode={voiceMode} onModeChange={setVoiceMode} />
           <VoiceControl
             isListening={isListening}
             isSpeaking={isSpeaking}
