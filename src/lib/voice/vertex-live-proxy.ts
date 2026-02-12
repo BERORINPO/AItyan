@@ -10,7 +10,6 @@ import { GEMINI_LIVE_SYSTEM_PROMPT } from "@/lib/llm/prompts";
 
 // Vertex AI Live APIのWebSocketエンドポイント
 const LOCATION = "us-central1";
-const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT || "";
 const MODEL = "gemini-live-2.5-flash-native-audio";
 
 const getVertexLiveUrl = () =>
@@ -35,9 +34,12 @@ async function getAccessToken(): Promise<string> {
  * セットアップメッセージを生成する
  */
 function createSetupMessage() {
+    const projectId = process.env.GOOGLE_CLOUD_PROJECT || "";
+    console.log("[VertexLive] Project ID check:", projectId); // Debug
+
     return {
         setup: {
-            model: `projects/${PROJECT_ID}/locations/${LOCATION}/publishers/google/models/${MODEL}`,
+            model: `projects/${projectId}/locations/${LOCATION}/publishers/google/models/${MODEL}`,
             generationConfig: {
                 responseModalities: ["AUDIO"],
                 speechConfig: {
@@ -89,7 +91,7 @@ export async function createVertexLiveProxy(
     serverWs.on("open", () => {
         console.log("[VertexLive] Vertex AI Live APIに接続完了");
         const setupMsg = createSetupMessage();
-        console.log("[VertexLive] セットアップメッセージ送信中...");
+        console.log("[VertexLive] セットアップメッセージ送信中:", JSON.stringify(setupMsg, null, 2));
         serverWs.send(JSON.stringify(setupMsg));
     });
 
