@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import type { VoiceMode, ChatMessage, Emotion } from "@/types";
 import { GeminiLiveSession } from "@/lib/voice/gemini-live";
 import {
@@ -166,7 +167,7 @@ export function useVoiceChat({
         case "transcription":
           if (msg.data.isFinal) {
             onMessage({
-              id: crypto.randomUUID(),
+              id: uuidv4(),
               role: "user",
               content: msg.data.text,
               timestamp: Date.now(),
@@ -175,7 +176,7 @@ export function useVoiceChat({
           break;
         case "response-text":
           onMessage({
-            id: crypto.randomUUID(),
+            id: uuidv4(),
             role: "assistant",
             content: msg.data.text,
             emotion: msg.data.emotion as Emotion,
@@ -232,7 +233,7 @@ export function useVoiceChat({
       },
       onTranscription: (text) => {
         onMessage({
-          id: crypto.randomUUID(),
+          id: uuidv4(),
           role: "assistant",
           content: text,
           timestamp: Date.now(),

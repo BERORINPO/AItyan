@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 import type { ChatMessage } from "@/types";
 
 export function useConversation() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [sessionId] = useState(() => crypto.randomUUID());
+  const [sessionId] = useState(() => uuidv4());
   const [isLoading, setIsLoading] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -37,7 +38,7 @@ export function useConversation() {
       if (!content.trim() || isLoading) return;
 
       const userMessage: ChatMessage = {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         role: "user",
         content: content.trim(),
         timestamp: Date.now(),
@@ -69,7 +70,7 @@ export function useConversation() {
         const emotionMatch = data.response.match(/\[emotion:\s*(\w+)\]/);
 
         const aiMessage: ChatMessage = {
-          id: crypto.randomUUID(),
+          id: uuidv4(),
           role: "assistant",
           content: data.response.replace(/\[emotion:\s*\w+\]\s*/g, ""),
           emotion: emotionMatch ? emotionMatch[1] : "neutral",
@@ -81,7 +82,7 @@ export function useConversation() {
         if (error instanceof Error && error.name === "AbortError") return;
 
         const errorMsg: ChatMessage = {
-          id: crypto.randomUUID(),
+          id: uuidv4(),
           role: "assistant",
           content: "ごめんね、ちょっとエラーが起きちゃった…もう一回話しかけてくれる？",
           emotion: "sad",
